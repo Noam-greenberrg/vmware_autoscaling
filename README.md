@@ -69,7 +69,7 @@ when you create vm you need the name so I am copy it from the inventory files {{
 
 ```
 
-# *NOTE instal vmtools on the host as part of the playbook ONLY in the end rename the host
+# * NOTE Install vmtools on the host as part of the playbook ONLY in the end rename the host
 
 you need to understand YOU DON’T  connect to remote server your linux box that run ansible play will do it for you this is why  ״connection: local״ in the script
 
