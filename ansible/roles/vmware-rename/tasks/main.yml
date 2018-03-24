@@ -1,0 +1,25 @@
+---
+
+
+- name: Start Rename Vm host Create Template File
+  template: src=VMhostChangeName.j2 dest=./VMreconfigName/VMhostChangeName-{{inventory_hostname_short}}.py owner=root group=root mode="u=rwx,g=r,o=r"
+  
+- name: Run Python commands VMhostChangeName
+  local_action: shell ./VMreconfigName/VMhostChangeName-{{inventory_hostname_short}}.py
+  async: 360
+  poll: 5
+  register: VMhostChangeName
+  ignore_errors: true
+
+
+
+- name: Start Move VM to new datastore VMreconfigName
+  template: src=VMGuestMoveDataStore.j2 dest=./VMreconfigName/VMGuestMoveDataStore-{{inventory_hostname}}.py owner=root group=root mode="u=rwx,g=r,o=r"
+
+- name: Run Python commands VMGuestMoveDataStore
+  local_action: shell ./VMreconfigName/VMGuestMoveDataStore-{{inventory_hostname}}.py
+  async: 360
+  poll: 5
+  register: VMGuestMoveDataStore
+  ignore_errors: true
+

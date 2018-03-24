@@ -1,0 +1,17 @@
+#!/bin/python
+from pysphere import *
+from pysphere.resources import VimService_services as VI
+from pysphere import VIException, VIApiException, FaultTypes
+
+server = VIServer()
+server.connect("VCENTER_IP", "USER@FQDN", "PASSWORD")
+VM_NAME = ("{{inventory_hostname}}")
+vm = server.get_vm_by_name(VM_NAME)
+DATASTORE2 = "DATA_STORE_NAME" #to datastore
+vcenter_datastore_name = server.get_datastores().items()
+
+for items in range(0,len(vcenter_datastore_name)):
+    if vcenter_datastore_name[items][1] == DATASTORE2:
+       datastore = vcenter_datastore_name[items][0]
+
+vm.relocate(vm, datastore=datastore)

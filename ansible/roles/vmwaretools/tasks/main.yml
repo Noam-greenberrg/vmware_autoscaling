@@ -1,0 +1,32 @@
+---
+- name: Check if VMware Guest and VM tools are install 
+  stat: path=/usr/sbin/vmtoolsd
+  register: vm
+  when: ansible_virtualization_type == "VMware"
+
+
+- name: Launch VMwareTools installation
+  command: VMWARE_TOOL_PATH/vmware-tools-distrib/vmware-install.pl -d
+  when: vm.stat.exists == False and  ansible_distribution_version < 7.1
+
+- name: install open-vm-tools and lib files
+  yum: name={{ item }} state=latest
+  with_items:
+   - open-vm-tools
+   - libdnet
+  when: ansible_distribution_version >= 7.1
+
+
+
+- name: Reboot
+  shell: sleep 2 && shutdown -r now "Ansible updates triggered"
+  async: 5
+  poll: 0
+  sudo: true
+  ignore_errors: true
+  when: vm.stat.exists == False
+
+- name: Waiting for all app servers
+  local_action: wait_for host={{ ansible_ssh_host | default(inventory_hostname) }}
+                port=22 state=started delay=60 timeout=90
+  when: vm.stat.exists == False

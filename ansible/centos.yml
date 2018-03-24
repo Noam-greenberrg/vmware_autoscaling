@@ -1,0 +1,14 @@
+---
+############################## START  VM Create #####################
+- hosts: 127.0.0.1
+  gather_facts: no
+  roles:
+  - vmcreate
+
+############################### GLOBAL #############################
+
+- hosts: OS-CentOS 
+  remote_user: root
+  roles:
+  - vmwaretools
+  - vmware-rename

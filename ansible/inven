@@ -1,0 +1,17 @@
+[server]
+
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+hostxx.FQDN ansible_ssh_host=IP
+
+
+
